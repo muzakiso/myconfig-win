@@ -1,0 +1,371 @@
+# YASB (Yet Another Status Bar) 主配置文件
+# 这是一个基于Python的Windows状态栏配置，支持Komorebi窗口管理器
+
+# 文件监控设置 - 当配置文件或样式表文件发生更改时自动重新加载
+watch_stylesheet: true  # 启用样式表文件监控，修改styles.css后自动应用
+watch_config: true      # 启用配置文件监控，修改config.yaml后自动应用
+debug: false            # 调试模式开关，开启后会显示更多调试信息
+# Komorebi窗口管理器集成设置
+# Komorebi是一个平铺窗口管理器，YASB可以与其集成显示工作空间信息
+komorebi:
+  # start_command: "komorebic start --whkd"      # 启动Komorebi窗口管理器的命令
+  # stop_command: "komorebic stop --whkd"        # 停止Komorebi窗口管理器的命令
+  # reload_command: "komorebic stop --whkd && komorebic start --whkd"  # 重新加载Komorebi的命令
+# 状态栏配置 - 定义一个或多个状态栏
+bars:
+  primary-bar:  # 主状态栏配置
+    enabled: true           # 启用此状态栏
+    screens: ['*']          # 显示在哪些屏幕上，'*'表示所有屏幕
+    class_name: "yasb-bar"  # 状态栏窗口的CSS类名
+    
+    # 状态栏对齐设置
+    alignment:
+      position: "top"       # 状态栏位置：top(顶部)、bottom(底部)
+      center: false         # 是否居中显示，false表示左对齐
+    
+    # 模糊效果设置（Windows 11风格）
+    blur_effect:
+      enabled: false        # 是否启用模糊效果
+      acrylic: false        # 是否启用亚克力效果
+      dark_mode: false      # 是否使用深色模式
+      round_corners: false  # 是否启用圆角
+      border_color: None    # 边框颜色，None表示无边框
+    
+    # 窗口标志设置
+    window_flags:
+      always_on_top: false  # 是否总是置顶显示
+      windows_app_bar: true # 是否作为Windows应用栏（避免被其他窗口覆盖）
+    
+    # 尺寸设置
+    dimensions:
+      width: "100%"         # 状态栏宽度，100%表示全屏宽
+      height: 28            # 状态栏高度（像素）
+    
+    # 内边距设置
+    padding:
+      top: 4                # 上内边距
+      left: 4               # 左内边距
+      bottom: 0             # 下内边距
+      right: 4              # 右内边距
+    # 小部件布局配置 - 定义状态栏上显示的小部件
+    widgets:
+      # 左侧小部件 - 从左到右依次显示
+      left:
+        [
+          "home",
+          #"win_button",          # Windows开始按钮
+          "glazewm_workspaces", # Glazewm工作空间指示器
+          # "komorebi_workspaces", # Komorebi工作空间指示器
+          "traffic",           # 网络流量监控        
+        ]
+      # 中间小部件 - 居中显示
+      center: [
+         "active_window",         # 当前活动窗口标题
+        # "media",
+        ]
+      # 右侧小部件 - 从右到左依次显示
+      right:
+        [
+          "taskbar",             # 任务栏（显示运行中的应用）
+          #"wallpapers",
+          "memory",  
+          "cpu",
+          #"language",            # 语言/输入法指示器
+          #"weather",              # 天气信息
+          "volume",              # 音量控制
+          "clock",               # 时钟
+          "power_menu",          # 电源菜单
+        ]
+widgets:
+# 小部件详细配置 - 每个小部件的具体设置
+  home:
+    type: "yasb.home.HomeWidget"
+    options:
+      label: "<span>\ue62a</span>"
+      menu_list:
+      - { title: "User Home", path: "~" }
+      - { title: "Download", path: "C:\\Users\\ashis\\Downloads" }
+      - { title: "Documents", path: "C:\\Users\\ashis\\Documents" }
+      - { title: "Pictures", path: "C:\\Users\\ashis\\Pictures" }
+      system_menu: true
+      power_menu: true
+      blur: true
+      round_corners: true
+      round_corners_type: "normal"
+      border_color: "#585b70"
+      distance: 6
+      container_padding: 
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+      alignment: "left"
+      direction: "down"
+      menu_labels:
+        shutdown: "Shutdown"
+        restart: "Restart"
+        logout: "Logout"
+        lock: "Lock"
+        sleep: "Sleep"
+        system: "System Settings"
+        about: "About This PC"
+        task_manager: "Task Manager"
+  # 语言/输入法指示器小部件
+  language:
+    type: "yasb.language.LanguageWidget"  # 小部件类型：语言指示器
+    options:
+      label: "<span>\uf11c</span>{lang[country_code]}"  # 显示格式：键盘图标+国家代码（如US、CN）
+      update_interval: 5      # 更新间隔（秒）
+      callbacks:
+        on_left: "do_nothing"   # 左键点击：无操作
+        on_middle: "do_nothing" # 中键点击：无操作
+        on_right: "do_nothing"  # 右键点击：无操作
+  glazewm_workspaces:
+    type: "glazewm.workspaces.GlazewmWorkspacesWidget"
+    options:
+      offline_label: "<span>󰖱</span> Offline"  # 使用图标让离线状态更美观
+      hide_empty_workspaces: true  # 显示空工作空间，保持布局一致性
+      hide_if_offline: false  # 离线时也显示，方便知道状态
+  # 当前活动窗口小部件 - 显示当前聚焦窗口的标题
+  active_window:
+    type: "yasb.active_window.ActiveWindowWidget"  # 小部件类型：活动窗口
+    options:
+      label: "{win[title]}"        # 主标签格式：显示窗口标题
+      label_alt: "[class_name='{win[class_name]}' exe='{win[process][name]}' hwnd={win[hwnd]}]"  # 备用标签：显示详细信息
+      label_no_window: ""        # 无窗口时显示的内容
+      label_icon: true            # 是否显示窗口图标
+      label_icon_size: 14         # 图标大小（像素）
+      max_length: 56              # 标题最大长度
+      max_length_ellipsis: "..."  # 超出最大长度时的省略号
+      monitor_exclusive: true     # 是否只显示当前监视器的窗口信息
+  # 时钟小部件 - 显示当前日期和时间
+  clock:
+    type: "yasb.clock.ClockWidget"  # 小部件类型：时钟
+    options:
+      label: "<span>\udb83\ude17</span>{%a %b %d %H:%M}"        # 主标签格式：图标+简短日期时间（如：一 1月 15 14:30）
+      label_alt: "<span>\udb83\ude17</span>{%A, %d %B %Y %H:%M}"  # 备用标签：图标+完整日期时间（如：星期一, 15 一月 2024 14:30）
+      timezones: []  # 时区列表，留空表示使用系统时区
+  # # Komorebi工作空间小部件 - 显示和管理虚拟工作空间
+  # komorebi_workspaces:
+  #   type: "komorebi.workspaces.WorkspaceWidget"  # 小部件类型：Komorebi工作空间
+  #   options:
+  #       label_offline: "\u26a1 Offline"  # Komorebi离线时的显示文本（闪电图标+Offline）
+  #       label_workspace_btn: ""          # 空工作空间按钮的标签（留空）
+  #       label_workspace_active_btn: ""   # 当前活动工作空间按钮的标签（留空）
+  #       label_workspace_populated_btn: "" # 有窗口的工作空间按钮的标签（留空）
+  #       label_default_name: "{index}"     # 工作空间默认名称，{index}会被替换为索引号
+  #       label_zero_index: false           # 工作空间索引是否从0开始
+  #       hide_empty_workspaces: false      # 是否隐藏空的工作空间
+  #       hide_if_offline: false           # Komorebi离线时是否隐藏此小部件
+  #       animation: true                   # 是否启用动画效果
+  # 天气小部件 - 显示当前天气信息（需要网络API）
+  weather:
+    type: "yasb.weather.WeatherWidget"  # 小部件类型：天气
+    options:
+      label: "<span>{icon}</span> {temp}"  # 主标签格式：图标+温度
+      label_alt: "<span>{icon}</span> {location}: Min {min_temp}, Max {max_temp}, Humidity {humidity}"  # 备用标签：详细信息
+      api_key: '24b6c2cda6d84066b0304531241908'  # WeatherAPI.com的API密钥（需要注册获取）
+      update_interval: 600  # 更新间隔（秒），最小600秒（10分钟）
+      hide_decimal: true    # 是否隐藏温度的小数位
+      location: 'USA Los Angeles 90006'  # 查询位置，格式：国家 城市 邮编
+      callbacks:
+        on_left: "toggle_label"  # 左键点击：切换显示模式（简洁/详细）
+      # 天气图标配置 - 使用Nerd Fonts图标
+      icons: 
+        sunnyDay: "\udb81\udd99"     # 晴天
+        clearNight: "\udb81\udd99"   # 晴朗夜晚
+        cloudyDay: "\udb81\udd99"    # 多云白天
+        cloudyNight: "\udb81\udd99"  # 多云夜晚
+        rainyDay: "\udb81\udd99"     # 雨天
+        rainyNight: "\udb81\udd99"   # 雨夜
+        snowyIcyDay: "\udb81\udd99"  # 雪天
+        snowyIcyNight: "\udb81\udd99" # 雪夜
+        blizzardDay: "\udb81\udd99"  # 暴风雪
+        default: "\udb81\udd99"      # 默认图标
+  # 音量控制小部件 - 显示和控制当前音量
+  volume:
+    type: "yasb.volume.VolumeWidget"  # 小部件类型：音量控制
+    options:
+      label: "<span>{icon}</span> {level}"  # 主标签格式：图标+音量级别
+      label_alt: "{volume}"      # 备用标签：显示音量数值
+      # 音量图标配置 - 根据音量级别显示不同图标
+      volume_icons:
+        - "\ueee8"  # 静音图标
+        - "\uf026"  # 0-10% 音量图标
+        - "\uf027"  # 11-30% 音量图标
+        - "\uf027"  # 31-60% 音量图标
+        - "\uf028"  # 61-100% 音量图标
+      callbacks:
+        on_right: "exec cmd.exe /c start ms-settings:sound"  # 右键点击：打开Windows声音设置
+  # 电源菜单小部件 - 提供系统电源选项菜单
+  power_menu:
+    type: "yasb.power_menu.PowerMenuWidget"  # 小部件类型：电源菜单
+    options:
+      label: "<span>\uf011</span>"  # 显示图标：电源图标
+      uptime: True           # 是否显示系统运行时间
+      blur: False            # 是否启用模糊效果
+      blur_background: True  # 是否模糊背景
+      animation_duration: 200  # 动画持续时间（毫秒）
+      button_row: 5          # 按钮行数，最小1最大5
+      # 电源按钮配置 - 图标和标签
+      buttons:
+        shutdown: ["\uf011","Shut Down"]    # 关机按钮：图标+文字
+        restart: ["\uead2","Restart"]        # 重启按钮：图标+文字
+        signout: ["\udb80\udf43","Sign out"] # 注销按钮：图标+文字
+        hibernate: ["\uf28e","Hibernate"]  # 休眠按钮：图标+文字
+        sleep: ["\u23fe","Sleep"]           # 睡眠按钮：图标+文字
+        cancel: ["","Cancel"]               # 取消按钮：无图标+文字
+  # 任务栏小部件 - 显示当前运行的应用程序
+  taskbar:
+    type: "yasb.taskbar.TaskbarWidget"  # 小部件类型：任务栏
+    options:
+      animation:
+        enabled: true      # 是否启用动画效果
+      icon_size: 14        # 应用图标大小（像素）
+      # 忽略的应用程序配置 - 符合条件的应用不会显示在任务栏
+      ignore_apps:
+        processes: []  # 要忽略的进程名称列表
+        titles: []     # 要忽略的窗口标题列表（支持正则表达式）
+        classes: []    # 要忽略的窗口类名列表
+      # 容器内边距设置
+      container_padding:
+        top: 0     # 上内边距
+        left: 0    # 左内边距
+        bottom: 0  # 下内边距
+        right: 0   # 右内边距
+  # Windows开始按钮小部件 - 模拟Windows开始菜单按钮
+  win_button:
+    type: "yasb.custom.CustomWidget"  # 小部件类型：自定义小部件
+    options:
+      label: "<span>\udb80\udf5c</span>"      # 主标签：Windows图标
+      label_alt: "<span>\udb80\udf5c</span>"  # 备用标签：同上
+      class_name: "win-btn"          # CSS类名，用于样式定制
+      callbacks:
+        on_left: "exec start_menu"    # 左键点击：打开开始菜单
+  # 网络流量监控小部件 - 显示实时网络上传下载速度
+  traffic:
+    type: "yasb.traffic.TrafficWidget"  # 小部件类型：网络流量
+    options:
+      label: "<span>\udb82\udcfa</span> \uea9a{download_speed} \ueaa1{upload_speed}"  # 主标签：图标+下载速度+上传速度
+      label_alt: "<span>\udb82\udcfa</span> Download {download_speed} | Upload {upload_speed}"  # 备用标签：详细显示
+      update_interval: 1000  # 更新间隔（毫秒），1000ms = 1秒
+      callbacks:
+        on_left: 'toggle_label'      # 左键点击：切换显示模式（简洁/详细）
+        on_right: 'exec cmd /c Taskmgr'  # 右键点击：打开Windows任务管理器
+  # 内存使用情况小部件 - 显示系统内存使用情况
+  memory:
+    type: "yasb.memory.MemoryWidget"
+    options:
+      label: "<span>\uf4bc</span> {virtual_mem_free}/{virtual_mem_total}"
+      label_alt: "<span>\uf4bc</span> VIRT: {virtual_mem_percent}% SWAP: {swap_mem_percent}%"
+      update_interval: 5000
+      callbacks:
+        on_left: "toggle_label"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+      memory_thresholds:
+        low: 25
+        medium: 50
+        high: 90
+
+  cpu:
+    type: "yasb.cpu.CpuWidget"
+    options:
+      label: "<span>\uf4bc</span> {info[percent][total]}%"
+      label_alt: "<span>\uf437</span> {info[histograms][cpu_percent]}"
+      update_interval: 2000
+      cpu_thresholds:
+        low: 25
+        medium: 50
+        high: 90
+      histogram_icons:
+        - "\u2581" # 0%
+        - "\u2582" # 10%
+        - "\u2582" # 20%
+        - "\u2583" # 30%
+        - "\u2584" # 40%
+        - "\u2585" # 50%
+        - "\u2586" # 60%
+        - "\u2587" # 70%
+        - "\u2588" # 80%+
+      histogram_num_columns: 8
+      callbacks:
+        on_right: "exec cmd /c Taskmgr"
+
+  wallpapers:
+    type: "yasb.wallpapers.WallpapersWidget"
+    options:
+      label: "<span>\udb83\ude09</span>"
+      image_path: "C:\\Users\\cy\\.config\\yasb\\wallpapaer" # Example path to folder with images
+      change_automatically: false # Automatically change wallpaper
+      update_interval: 60 # If change_automatically is true, update interval in seconds
+      gallery:
+          enabled: true
+          blur: true
+          image_width: 220
+          image_per_page: 8
+          show_buttons: false
+          orientation: "portrait"
+          image_spacing: 8
+          lazy_load: true
+          lazy_load_delay: 80
+          lazy_load_fadein: 400
+          image_corner_radius: 20
+          enable_cache: true
+      run_after: # List of functions to run after wallpaper is updated
+        - "wal -s -t -e -q -n -i {image}" # Example command to run after wallpaper is updated
+        - "cmd.exe /c start /min pwsh ./yasb.ps1" # Example command to run after wallpaper is updated
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]
+
+  media:
+    type: "yasb.media.MediaWidget"
+    options:
+      label: "<span>\udb80\udf87</span> {title}"
+      label_alt: "<span>\udb80\udf87</span> {title} - {artist}"
+      hide_empty: true
+      callbacks:
+        on_left: "toggle_media_menu"
+        on_middle: "do_nothing"
+        on_right: "toggle_label"
+      max_field_size:
+        label: 40
+        label_alt: 60
+      show_thumbnail: false
+      controls_only: false
+      controls_left: false
+      thumbnail_alpha: 80
+      thumbnail_padding: 8
+      thumbnail_corner_radius: 16
+      icons:
+        prev_track: "\udb81\udcae"
+        next_track: "\udb81\udcad"
+        play: "\udb81\udc0a"
+        pause: "\udb80\udfe4"
+      media_menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "#585b70"
+        alignment: "right"
+        direction: "down"
+        offset_top: 6
+        offset_left: 10
+        thumbnail_corner_radius: 8
+        thumbnail_size: 120
+        max_title_size: 80
+        max_artist_size: 20
+        show_source: true
+      media_menu_icons:
+        play: "\ue768"
+        pause: "\ue769"
+        prev_track: "\ue892"
+        next_track: "\ue893"
+      label_shadow:
+        enabled: true
+        color: "black"
+        radius: 3
+        offset: [ 1, 1 ]

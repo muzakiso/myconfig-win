@@ -1,0 +1,556 @@
+/* YASB (Yet Another Status Bar) 样式表配置
+ * 这是一个现代化的Windows状态栏样式配置
+ * 采用深色主题配合彩色小部件的设计风格
+ * 需要Nerd Fonts字体支持以显示图标
+ */
+
+/* 全局基础样式 - 应用于所有元素 */
+* {
+    font-size: 12px;           /* 字体大小：12像素 */
+    color: #bec8e7;            /* 文本颜色：淡蓝紫色 */
+    font-weight: 500;          /* 字体粗细：中等 */
+    font-family: "JetBrainsMono NFP";  /* 字体：Maple Mono NF CN 字体，备用字体：JetBrains Mono Nerd Font */
+    margin: 0;                 /* 外边距：0 */
+    padding: 0;                /* 内边距：0 */
+}
+/* 状态栏主容器样式 */
+.yasb-bar {
+    padding: 0;     /* 内边距：0 */
+    margin: 0;      /* 外边距：0 */
+}
+/* 小部件通用样式 - 适用于所有小部件 */
+.widget {
+    padding: 0 8px;     /* 水平内边距：8像素，垂直内边距：0 */
+    margin: 0 4px;      /* 水平外边距：4像素，垂直外边距：0 */
+    border-radius: 6px; /* 圆角半径：6像素 */
+}
+/* 小部件图标样式 - 控制所有小部件中的图标显示 */
+.widget .icon {
+    font-size: 18px;  /* 图标字体大小：18像素（比文本大） */
+}
+/* Windows开始按钮样式 - 特殊的黄色主题 */
+.win-btn {
+    background-color: #F3BF7D;  /* 背景色：暖黄色 */
+}
+.win-btn .icon {
+    color: #142123;            /* 图标颜色：深灰蓝色 */
+}
+/* Komorebi工作空间小部件样式 - 深色背景 */
+.komorebi-workspaces {
+    background-color: #221f2e;  /* 背景色：深紫灰色 */
+}
+.komorebi-workspaces .offline-status {
+    color: #627199;            /* 离线状态文本颜色：灰蓝色 */
+    font-size: 12px;           /* 字体大小：12像素 */
+    padding: 0 4px;            /* 水平内边距：4像素，垂直内边距：0 */
+    font-weight: 600;          /* 字体粗细：半粗体 */
+}
+/* 工作空间按钮基础样式 - 小圆点设计 */
+.komorebi-workspaces .ws-btn {
+    border: none;                    /* 无边框 */
+    background-color: #9cd1dd;     /* 背景色：淡青色 */
+    margin: 0px 4px;                 /* 水平外边距：4像素，垂直外边距：0 */
+    padding: 0;                      /* 内边距：0 */
+    color: rgba(0, 0, 0, 0);        /* 文字颜色：完全透明（隐藏文字） */
+    border-radius: 5px;              /* 圆角半径：5像素（圆形效果） */
+    height: 10px;                    /* 高度：10像素 */
+    width: 10px;                     /* 宽度：10像素 */
+}
+/* 工作空间按钮悬停效果 */
+.komorebi-workspaces .ws-btn:hover {
+    background-color: #91b2e7;     /* 悬停背景色：淡蓝色 */
+}
+/* 有窗口的工作空间按钮样式 */
+.komorebi-workspaces .ws-btn.populated {
+    background-color: #ea7094;     /* 背景色：粉红色（表示有窗口） */
+}
+
+/* 当前活动工作空间按钮样式 - 长条设计 */
+.komorebi-workspaces .ws-btn.active {
+    color: rgba(149, 177, 255, 0);  /* 文字颜色：完全透明（隐藏文字） */
+    background-color: #c0aae8;     /* 背景色：淡紫色 */
+    width: 36px;                     /* 宽度：36像素（比正常按钮宽） */
+    height: 10px;                    /* 高度：10像素 */
+    border-radius: 5px;              /* 圆角半径：5像素 */
+}
+/* 网络流量小部件样式 - 青色主题 */
+.traffic-widget {
+    background-color: #9ecfd7;  /* 背景色：淡青色 */
+    padding: 0;                  /* 内边距：0 */
+}
+.traffic-widget .icon {
+    color: #142123;            /* 图标颜色：深灰蓝色 */
+    padding-right: 6px;        /* 右内边距：6像素 */
+    padding-left: 6px;         /* 左内边距：6像素 */
+}
+.traffic-widget .label {
+    background-color: #221f2e;  /* 背景色：深紫灰色 */
+    margin: 1px;                /* 外边距：1像素 */
+    border-radius: 6px;         /* 圆角半径：6像素 */
+    padding: 0 6px;             /* 水平内边距：6像素，垂直内边距：0 */
+    color: #9ecfd7;            /* 文字颜色：淡青色（与背景形成对比） */
+}
+
+/* 时钟小部件样式 - 紫色主题 */
+.clock-widget {
+    background-color: #c2a8e3;  /* 背景色：淡紫色 */
+    padding: 0;                  /* 内边距：0 */
+}
+.clock-widget .icon {
+    color: #142123;            /* 图标颜色：深灰蓝色 */
+    padding: 0 6px;            /* 水平内边距：6像素，垂直内边距：0 */
+}
+.clock-widget .label {
+    background-color: #221f2e;  /* 背景色：深紫灰色 */
+    color: #c2a8e3;            /* 文字颜色：淡紫色（与背景形成对比） */
+    padding: 0 6px;            /* 水平内边距：6像素，垂直内边距：0 */
+    margin: 1px;               /* 外边距：1像素 */
+    border-radius: 6px;        /* 圆角半径：6像素 */
+}
+/* 音量控制小部件样式 - 粉色主题 */
+.volume-widget {
+    background-color: #f38ba8;  /* 背景色：粉红色 */
+    padding: 0;                  /* 内边距：0 */
+}
+.volume-widget .icon {
+    color: #142123;            /* 图标颜色：深灰蓝色 */
+    padding: 0 6px;            /* 水平内边距：6像素，垂直内边距：0 */
+}
+.volume-widget .label {
+    background-color: #0d0238;  /* 背景色：深紫灰色 */
+    color: #f38ba8;            /* 文字颜色：粉红色（与背景形成对比） */
+    padding: 0 8px;            /* 水平内边距：8像素，垂直内边距：0 */
+    margin: 1px;               /* 外边距：1像素 */
+    border-radius: 6px;        /* 圆角半径：6像素 */
+}
+.audio-menu {
+    background-color:rgba(17, 17, 27, 0.4); 
+}
+.audio-container .device {
+    background-color:transparent;
+    border: none;
+    padding:6px 8px 6px 4px;
+    margin: 2px 0;
+    font-size: 12px;
+    border-radius: 4px;
+}
+.audio-container .device.selected {
+    background-color: rgba(255, 255, 255, 0.085);
+}
+.audio-container .device:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+}
+/* 天气小部件样式 - 青色主题（与网络流量相同） */
+.weather-widget {
+    background-color: #9ecfd7;  /* 背景色：淡青色 */
+    padding: 0;                  /* 内边距：0 */
+}
+.weather-widget .icon {
+    color: #142123;            /* 图标颜色：深灰蓝色 */
+    padding: 0 6px;            /* 水平内边距：6像素，垂直内边距：0 */
+}
+.weather-widget .label {
+    background-color: #221f2e;  /* 背景色：深紫灰色 */
+    color: #9ecfd7;            /* 文字颜色：淡青色（与背景形成对比） */
+    padding: 0 6px;            /* 水平内边距：6像素，垂直内边距：0 */
+    margin: 1px;               /* 外边距：1像素 */
+    border-radius: 6px;        /* 圆角半径：6像素 */
+}
+
+/* 电源菜单小部件样式 - 紫色主题 */
+.power-menu-widget {
+    background-color: #c4a7e7;  /* 背景色：淡紫色 */
+    padding: 0;                  /* 内边距：0 */
+}
+
+.power-menu-widget .label {
+    color: #142123;            /* 文字颜色：深灰蓝色 */
+    padding: 0 8px;            /* 水平内边距：8像素，垂直内边距：0 */
+    font-weight: bold;         /* 字体粗细：粗体 */
+    font-size: 14px;           /* 字体大小：14像素（比正常文本大） */
+}
+
+/* 语言指示器小部件样式 - 黄色主题 */
+.language-widget {
+    background-color: #f5c276;  /* 背景色：暖黄色 */
+    padding: 0;                  /* 内边距：0 */
+}
+.language-widget .icon {
+    color: #142123;            /* 图标颜色：深灰蓝色 */
+    padding: 0 6px;            /* 水平内边距：6像素，垂直内边距：0 */
+}
+.language-widget .label {
+    background-color: #221f2e;  /* 背景色：深紫灰色 */
+    color: #f5c276;            /* 文字颜色：暖黄色（与背景形成对比） */
+    padding: 0 8px;            /* 水平内边距：8像素，垂直内边距：0 */
+    margin: 1px;               /* 外边距：1像素 */
+    border-radius: 6px;        /* 圆角半径：6像素 */
+}
+/* 任务栏小部件样式 - 深色背景 */
+.taskbar-widget {
+    background-color: #221f2e;  /* 背景色：深紫灰色 */
+    padding: 0;                  /* 内边距：0 */
+}
+.taskbar-widget .app-container {
+    padding: 0 8px;            /* 水平内边距：8像素，垂直内边距：0 */
+    border: none;              /* 无边框 */
+    margin: 0;                 /* 外边距：0 */
+}
+.taskbar-widget .app-container .app-title {
+    padding-left: 4px;       /* 左内边距：4像素（图标和标题之间的间距） */
+}
+/* 活动窗口小部件样式 - 紫色主题 */
+.active-window-widget {
+    background-color: #c6a7e8;  /* 背景色：淡紫色 */
+    padding: 0;                  /* 内边距：0 */
+}
+.active-window-widget .label {
+    color: #c6a7e8;            /* 文字颜色：淡紫色 */
+    background-color: #221f2e;  /* 背景色：深紫灰色 */
+    padding: 0 8px;            /* 水平内边距：8像素，垂直内边距：0 */
+    margin: 1px;               /* 外边距：1像素 */
+    border-radius: 6px;        /* 圆角半径：6像素 */
+}
+.active-window-widget .icon {
+    padding: 0 8px;            /* 水平内边距：8像素，垂直内边距：0 */
+    border: none;              /* 无边框 */
+    margin: 0;                 /* 外边距：0 */
+    background-color: #c6a7e8;  /* 背景色：淡紫色 */
+}
+
+/* 电源菜单弹出窗口样式 */
+/* 系统运行时间显示 */
+.uptime {
+    font-size: 14px;           /* 字体大小：14像素 */
+    margin-bottom: 10px;       /* 下外边距：10像素 */
+    color: rgba(191, 202, 219, 0.726);  /* 文字颜色：半透明淡蓝色 */
+    font-weight: 600;          /* 字体粗细：半粗体 */
+}
+
+/* 电源菜单弹出窗口主容器 */
+.power-menu-popup {
+    background-color: rgba(24, 24, 37, 0);  /* 背景色：完全透明 */
+    border-radius: 12px;                    /* 圆角半径：12像素 */
+
+}
+/* 电源菜单按钮样式 */
+.power-menu-popup .button {
+    padding: 0;                    /* 内边距：0 */
+    width: 180px;                  /* 宽度：180像素 */
+    height: 230px;                 /* 高度：230像素 */
+    border-radius: 8px;            /* 圆角半径：8像素 */
+    background-color: #221f2e;     /* 背景色：深紫灰色 */
+    color: #c2a7e2;                /* 文字颜色：淡紫色 */
+    border: 8px solid #1b1925;     /* 边框：8像素实线，深紫色 */
+    margin: 0px;                   /* 外边距：0 */
+}
+
+/* 电源菜单按钮悬停效果 */
+.power-menu-popup .button.hover {
+    background-color: #1b1925;     /* 悬停背景色：更深的紫色 */
+}
+/* 电源菜单按钮文字标签样式 */
+.power-menu-popup .button .label {
+    margin-bottom: 8px;       /* 下外边距：8像素 */
+    font-size: 16px;          /* 字体大小：16像素 */
+    font-weight: 500;         /* 字体粗细：中等 */
+    color: #c5a6e7;           /* 文字颜色：淡紫色 */
+
+}
+
+/* 电源菜单按钮图标样式 */
+.power-menu-popup .button .icon {
+    font-size: 64px;          /* 图标字体大小：64像素（大图标） */
+    padding-top: 32px;        /* 上内边距：32像素（图标居中） */
+    color: #c5a6e7;           /* 图标颜色：淡紫色 */
+}
+/* 取消按钮图标样式 - 特殊样式 */
+.power-menu-popup .button.cancel .icon {
+    padding: 0;     /* 内边距：0 */
+    margin: 0;      /* 外边距：0 */
+}
+
+/* 取消按钮文字标签样式 */
+.power-menu-popup .button.cancel .label {
+    margin: 0;      /* 外边距：0 */
+}
+
+/* 取消按钮基础样式 - 比其他按钮小 */
+.power-menu-popup .button.cancel {
+    height: 32px;                /* 高度：32像素（比其他按钮小） */
+    border-radius: 4px;          /* 圆角半径：4像素 */
+    border: none;                /* 无边框 */
+    background-color: #221f2e;   /* 背景色：深紫灰色 */
+}
+
+/* 取消按钮悬停效果 */
+.power-menu-popup .button.cancel:hover {
+    background-color: #1b1925;   /* 悬停背景色：更深的紫色 */
+}
+
+/* GlazeWM 工作空间小部件样式 - 青色主题，与其他组件协调 */
+.glazewm-workspaces {
+    background-color: #89dceb;  /* 背景色：淡青色，与traffic小部件一致 */
+    padding: 0;                  /* 内边距：0，与其他小部件一致 */
+    border-radius: 6px;          /* 圆角半径：6像素，与其他小部件一致 */
+}
+.glazewm-workspaces .ws-btn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0px 4px;
+    margin: 0 2px;              /* 外边距：与其他小部件一致 */
+}
+.glazewm-workspaces .ws-btn.active_populated {
+    color: #c0aae8;            /* 文字颜色：淡紫色，与活动窗口小部件一致 */
+    background-color: #221f2e;  /* 背景色：深紫灰色，与其他小部件标签一致 */
+    width: 36px;                /* 宽度：36像素，与komorebi工作空间一致 */
+    height: 16px;               /* 高度：16像素，增加高度以容纳文字 */
+    border-radius: 5px;         /* 圆角半径：5像素 */
+    margin: 0px 3px;            /* 外边距：与其他小部件一致 */
+    border: none;
+    font-size: 12px;           /* 字体大小：12像素 */
+    font-weight: 600;          /* 字体粗细：半粗体 */
+    display: flex;             /* 使用flex布局 */
+    align-items: center;       /* 垂直居中 */
+    justify-content: center;   /* 水平居中 */
+}
+.glazewm-workspaces .ws-btn.active_empty {
+    color: #c0aae8;            /* 文字颜色：淡紫色，与活动窗口小部件一致 */
+    background-color: #221f2e;  /* 背景色：深紫灰色 */
+    width: 36px;                /* 宽度：36像素 */
+    height: 16px;               /* 高度：16像素，增加高度以容纳文字 */
+    border-radius: 5px;         /* 圆角半径：5像素 */
+    margin: 0px 3px;            /* 外边距：与其他小部件一致 */
+    border: none;
+    font-size: 12px;           /* 字体大小：12像素 */
+    font-weight: 600;          /* 字体粗细：半粗体 */
+    display: flex;             /* 使用flex布局 */
+    align-items: center;       /* 垂直居中 */
+    justify-content: center;   /* 水平居中 */
+}
+.glazewm-workspaces .ws-btn.populated {
+    background-color: #ea7094;  /* 背景色：粉红色，表示有窗口，与komorebi一致 */
+    margin: 0px 4px;            /* 外边距：与其他小部件一致 */
+    padding: 0;                 /* 内边距：0 */
+    color: rgba(0, 0, 0, 0);    /* 文字颜色：完全透明（隐藏文字） */
+    border-radius: 5px;         /* 圆角半径：5像素（圆形效果） */
+    height: 10px;               /* 高度：10像素 */
+    width: 10px;                /* 宽度：10像素 */
+}
+.glazewm-workspaces .ws-btn.empty {
+    background-color: #9cd1dd;  /* 背景色：淡青色，表示空工作空间 */
+    margin: 0px 4px;            /* 外边距：与其他小部件一致 */
+    padding: 0;                 /* 内边距：0 */
+    color: rgba(0, 0, 0, 0);    /* 文字颜色：完全透明（隐藏文字） */
+    border-radius: 5px;         /* 圆角半径：5像素（圆形效果） */
+    height: 10px;               /* 高度：10像素 */
+    width: 10px;                /* 宽度：10像素 */
+}
+.glazewm-workspaces .ws-btn:hover {
+    background-color: #91b2e7;  /* 悬停背景色：淡蓝色，与其他小部件一致 */
+}
+.glazewm-workspaces .offline-status {
+    color: #627199;            /* 离线状态文本颜色：灰蓝色 */
+    font-size: 12px;           /* 字体大小：12像素 */
+    padding: 0 8px;            /* 水平内边距：8像素，垂直内边距：0 */
+    font-weight: 600;          /* 字体粗细：半粗体 */
+    background-color: #221f2e;  /* 背景色：深紫灰色 */
+    border-radius: 6px;        /* 圆角半径：6像素 */
+    margin: 1px;               /* 外边距：1像素 */
+}
+
+/* Home 小部件样式 - 黄色主题，与其他组件协调 */
+.home-widget {
+    background-color: #f5c276;  /* 背景色：暖黄色，与language小部件一致 */
+    padding: 0;                  /* 内边距：0，与其他小部件一致 */
+    border-radius: 6px;          /* 圆角半径：6像素，与其他小部件一致 */
+    margin: 0 4px;              /* 外边距：4像素，与其他小部件一致 */
+}
+.home-widget .icon {
+    color: #142123;            /* 图标颜色：深灰蓝色 */
+    padding: 0 6px;            /* 水平内边距：6像素，垂直内边距：0 */
+    font-size: 14px;           /* 字体大小：14像素 */
+}
+.home-widget .icon:hover {
+    color: #142123;            /* 悬停图标颜色：保持深灰蓝色 */
+}
+.home-menu {
+    background-color: #221f2e;  /* 背景色：深紫灰色，与其他菜单一致 */
+    border-radius: 6px;        /* 圆角半径：6像素 */
+    border: none;              /* 无边框 */
+}
+.home-menu .menu-item {
+    padding: 8px 16px;         /* 内边距：与其他菜单项一致 */
+    font-size: 12px;           /* 字体大小：12像素 */
+    color: #f5c276;            /* 文字颜色：暖黄色，与背景形成对比 */
+    font-weight: 600;          /* 字体粗细：半粗体 */
+    border-radius: 4px;        /* 圆角半径：4像素 */
+    margin: 2px;               /* 外边距：2像素 */
+}
+.home-menu .menu-item:hover {
+    background-color: #1b1925;  /* 悬停背景色：更深的紫色 */
+    color: #f5c276;            /* 悬停文字颜色：保持暖黄色 */
+}
+.home-menu .separator {
+    max-height: 1px;
+    background-color: #585b70;  /* 分隔线颜色：灰蓝色 */
+    margin: 4px 8px;            /* 外边距：与其他分隔线一致 */
+}
+
+/* 内存使用情况小部件样式 - 绿色主题，与其他组件协调 */
+.memory-widget {
+    background-color: #a6da95;  /* 背景色：淡绿色，与其他小部件一致 */
+    padding: 0;                  /* 内边距：0，与其他小部件一致 */
+    border-radius: 6px;          /* 圆角半径：6像素，与其他小部件一致 */
+}
+.memory-widget .icon {
+    color: #142123;            /* 图标颜色：深灰蓝色，与其他小部件一致 */
+    padding: 0 6px;            /* 水平内边距：6像素，垂直内边距：0 */
+}
+.memory-widget .label {
+    background-color: #221f2e;  /* 背景色：深紫灰色，与其他小部件标签一致 */
+    color: #a6da95;            /* 文字颜色：淡绿色（与背景形成对比） */
+    padding: 0 8px;            /* 水平内边距：8像素，垂直内边距：0 */
+    margin: 1px;               /* 外边距：1像素 */
+    border-radius: 6px;        /* 圆角半径：6像素 */
+}
+
+/* CPU 使用情况小部件样式 - 橙色主题，与其他组件协调 */
+.cpu-widget {
+    background-color: #f5a97f;  /* 背景色：淡橙色，与其他小部件一致 */
+    padding: 0;                  /* 内边距：0，与其他小部件一致 */
+    border-radius: 6px;          /* 圆角半径：6像素，与其他小部件一致 */
+}
+.cpu-widget .icon {
+    color: #142123;            /* 图标颜色：深灰蓝色，与其他小部件一致 */
+    padding: 0 6px;            /* 水平内边距：6像素，垂直内边距：0 */
+}
+.cpu-widget .label {
+    background-color: #221f2e;  /* 背景色：深紫灰色，与其他小部件标签一致 */
+    color: #f5a97f;            /* 文字颜色：淡橙色（与背景形成对比） */
+    padding: 0 8px;            /* 水平内边距：8像素，垂直内边距：0 */
+    margin: 1px;               /* 外边距：1像素 */
+    border-radius: 6px;        /* 圆角半径：6像素 */
+}
+
+
+/* Media 小部件样式 - 红色主题，与其他组件协调 */
+.media-widget {
+    background-color: #ed8796;  /* 背景色：淡红色，与其他小部件一致 */
+    padding: 0;                  /* 内边距：0，与其他小部件一致 */
+    border-radius: 6px;          /* 圆角半径：6像素，与其他小部件一致 */
+    margin: 0 4px;              /* 外边距：4像素，与其他小部件一致 */
+}
+.media-widget .icon {
+    color: #142123;            /* 图标颜色：深灰蓝色，与其他小部件一致 */
+    padding: 0 6px;            /* 水平内边距：6像素，垂直内边距：0 */
+}
+.media-widget .label {
+    background-color: #221f2e;  /* 背景色：深紫灰色，与其他小部件标签一致 */
+    color: #ed8796;            /* 文字颜色：淡红色（与背景形成对比） */
+    padding: 0 8px;            /* 水平内边距：8像素，垂直内边距：0 */
+    margin: 1px;               /* 外边距：1像素 */
+    border-radius: 6px;        /* 圆角半径：6像素 */
+}
+.media-widget .btn.play,
+.media-widget .btn.prev,
+.media-widget .btn.next {
+    font-size: 16px;           /* 字体大小：16像素，与其他小部件一致 */
+    color: #142123;           /* 图标颜色：深灰蓝色，与其他小部件一致 */
+    padding: 0 4px;           /* 内边距：4像素，与其他小部件一致 */
+    background-color: transparent; /* 背景透明，与其他小部件一致 */
+    border: none;             /* 无边框，与其他小部件一致 */
+}
+.media-widget .btn.play:hover,
+.media-widget .btn.prev:hover,
+.media-widget .btn.next:hover {
+    color: #142123;           /* 悬停颜色：保持深灰蓝色，与其他小部件一致 */
+    background-color: rgba(255, 255, 255, 0.1); /* 悬停背景：轻微透明白色 */
+}
+
+.media-menu {
+    min-width: 320px;         /* 最小宽度：320像素，与其他菜单一致 */
+    max-width: 320px;         /* 最大宽度：320像素，与其他菜单一致 */
+    background-color: #221f2e; /* 背景色：深紫灰色，与其他菜单一致 */
+    border-radius: 6px;       /* 圆角半径：6像素，与其他菜单一致 */
+    border: none;             /* 无边框，与其他菜单一致 */
+}
+.media-menu .title,
+.media-menu .artist,
+.media-menu .source {
+    font-size: 12px;           /* 字体大小：12像素，与其他菜单项一致 */
+    font-weight: 600;          /* 字体粗细：半粗体，与其他菜单项一致 */
+    margin-left: 12px;         /* 左外边距：12像素，与其他菜单项一致 */
+    font-family: "Maple Mono NF CN Medium"; /* 字体：与其他小部件一致 */
+    color: #ed8796;            /* 文字颜色：淡红色，与media小部件一致 */
+}
+.media-menu .artist {
+    font-size: 11px;           /* 字体大小：11像素，略小于标题 */
+    color: #ed8796;            /* 文字颜色：淡红色，与标题一致 */
+    margin-top: 2px;           /* 上外边距：2像素 */
+    margin-bottom: 8px;         /* 下外边距：8像素 */
+}
+.media-menu .source {
+    color: #627199;            /* 文字颜色：灰蓝色，与其他辅助文本一致 */
+    font-size: 10px;          /* 字体大小：10像素，小于主要文本 */
+}
+.media-menu .btn {
+    font-family: "JetBrainsMono NFP"; /* 字体：与其他小部件一致 */
+    font-size: 16px;           /* 字体大小：16像素，与其他按钮一致 */
+    font-weight: 400;          /* 字体粗细：正常 */
+    margin: 8px 4px;           /* 外边距：8像素垂直，4像素水平 */
+    min-width: 32px;           /* 最小宽度：32像素 */
+    max-width: 32px;           /* 最大宽度：32像素 */
+    min-height: 32px;          /* 最小高度：32像素 */
+    max-height: 32px;          /* 最大高度：32像素 */
+    border-radius: 16px;       /* 圆角半径：16像素（圆形按钮） */
+    color: #ed8796;            /* 图标颜色：淡红色，与media小部件一致 */
+    background-color: transparent; /* 背景透明 */
+    border: none;              /* 无边框 */
+}
+.media-menu .btn.prev {
+    margin-left: 12px;         /* 左外边距：12像素，与其他菜单项对齐 */
+}
+.media-menu .btn:hover {
+    color: #ed8796;            /* 悬停颜色：保持淡红色 */
+    background-color: rgba(255, 255, 255, 0.1); /* 悬停背景：轻微透明白色 */
+}
+.media-menu .btn.play {
+    font-size: 18px;           /* 播放按钮字体大小：18像素，略大于其他按钮 */
+}
+.media-menu .btn.disabled:hover,
+.media-menu .btn.disabled {
+    color: #627199;            /* 禁用状态颜色：灰蓝色 */
+    background-color: transparent; /* 背景透明 */
+}
+.media-menu .playback-time {
+    font-size: 11px;           /* 字体大小：11像素，与其他辅助文本一致 */
+    font-family: "JetBrainsMono NFP"; /* 字体：与其他小部件一致 */
+    color: #627199;            /* 文字颜色：灰蓝色，与其他辅助文本一致 */
+    margin-top: 12px;          /* 上外边距：12像素 */
+    min-width: 80px;           /* 最小宽度：80像素 */
+    font-weight: 600;          /* 字体粗细：半粗体 */
+}
+.media-menu .progress-slider {
+    height: 8px;               /* 高度：8像素 */
+    margin: 8px 12px;          /* 外边距：8像素垂直，12像素水平 */
+    border-radius: 4px;        /* 圆角半径：4像素 */
+}
+.media-menu .progress-slider::groove {
+    background: transparent;   /* 背景透明 */
+    height: 4px;               /* 高度：4像素 */
+    border-radius: 2px;        /* 圆角半径：2像素 */
+    background: rgba(255, 255, 255, 0.15); /* 背景：轻微透明白色 */
+}
+.media-menu .progress-slider::groove:hover {
+    background: transparent;   /* 背景透明 */
+    height: 6px;               /* 悬停高度：6像素 */
+    border-radius: 3px;        /* 圆角半径：3像素 */
+    background: rgba(255, 255, 255, 0.25); /* 悬停背景：更明显的透明白色 */
+}
+.media-menu .progress-slider::sub-page {
+    background: #ed8796;       /* 进度条颜色：淡红色，与media小部件一致 */
+    border-radius: 2px;        /* 圆角半径：2像素 */
+    height: 4px;               /* 高度：4像素 */
+}
